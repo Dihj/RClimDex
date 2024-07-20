@@ -25,7 +25,7 @@ IndicesCalculation <- function(climdexinput) {
   file.prefix <- rclimdex.env$parameter$station
 
   ## Perform calulation and outut results
-#  WriteTrend(c("indices,start year,end year,slope,std of slope,p value"), paste(file.path, "trend/", file.prefix, "_trend.csv", sep = ""), label = TRUE)
+  WriteTrend(c("indices,start year,end year,slope,std of slope,p value"), paste(file.path, "trend/", file.prefix, "_trend.csv", sep = ""), label = TRUE)
   WriteIndice("tmaxmean", 1, file.path, file.prefix, climdexinput, monthly = TRUE, round = 2)
   WriteIndice("tminmean", 1, file.path, file.prefix, climdexinput, monthly = TRUE, round = 2)
   WriteIndice("summ", rclimdex.env$parameter$summ, file.path, file.prefix, climdexinput, pcicname = "su", custom = rclimdex.env$parameter$tmax.upper)
@@ -93,8 +93,8 @@ WriteIndice <- function(selection, choice, outpath, outname, climdexinput, month
 
     ## Output results in table, plot and trend summary
     WriteTable(result, label, paste(outpath, "indices/", outname, "_", toupper(selection), ".csv", sep = ""))
-#    WritePlot(cbind(result[, 1], result[, ncol(result)]), paste(outpath, "plots/", outname, "_", toupper(selection), ".pdf", sep = ""), main = paste(toupper(selection), outname, sep = "   "), xlab = "Year", ylab = toupper(selection))
-#    WriteTrend(cbind(result[, 1], result[, ncol(result)]), paste(outpath, "trend/", outname, "_trend.csv", sep = ""), name = selection)
+    WritePlot(cbind(result[, 1], result[, ncol(result)]), paste(outpath, "plots/", outname, "_", toupper(selection), ".pdf", sep = ""), main = paste(toupper(selection), outname, sep = "   "), xlab = "Year", ylab = toupper(selection))
+    WriteTrend(cbind(result[, 1], result[, ncol(result)]), paste(outpath, "trend/", outname, "_trend.csv", sep = ""), name = selection)
   }
 }
 
@@ -467,8 +467,8 @@ SetOutputFolders <- function(path) {
   }
   MakeFolder(path, "indices")
   MakeFolder(path, "log")
-#  MakeFolder(path, "plots")
-#  MakeFolder(path, "trend")
+  MakeFolder(path, "plots")
+  MakeFolder(path, "trend")
   if(is.na(rclimdex.env$logfile)) {
     assign("logfile", paste(path, paste("log.", gsub("-", "", gsub(":", "", gsub("[[:space:]]", ".", Sys.time()))), ".txt", sep = ""), sep = ""), envir = rclimdex.env)
   }
